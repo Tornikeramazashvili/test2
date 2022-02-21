@@ -1,0 +1,20 @@
+1. store data
+
+ const storeData = async (value) => {
+    await AsyncStorage.setItem("@storage_Key", value);
+  };
+
+2. get dat
+
+ useEffect(async () => {
+    const value = await AsyncStorage.getItem("@storage_Key");
+    setText(value);
+  }, []);
+
+3. remove data
+
+  const removeData = async () => {
+    await AsyncStorage.removeItem("@storage_Key");
+    setText("");
+  };
+

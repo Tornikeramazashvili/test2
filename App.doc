@@ -1,0 +1,42 @@
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { View, Text } from "react-native";
+
+function App() {
+  const client = new ApolloClient({
+    uri: "https://pspmagento.perse.pro/graphql",
+    cache: new InMemoryCache(),
+  });
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    client
+      .query({
+        query: gql`
+          query products {
+            products(search: "შამპუნი") {
+              items {
+                name
+                sku
+                special_price
+              }
+            }
+          }
+        `,
+      })
+      .then((result) => setProducts(result.data?.products?.items));
+  }, []);
+
+  return (
+    <>
+      <View>
+      {products.map((product) => (
+            <Text>{product.name}</Text>
+          ))}
+      </View>
+    </>
+  );
+}
+
+export default App;
