@@ -4,10 +4,13 @@ import { View, Text, TouchableOpacity, Pressable } from "react-native";
 import { Button } from "react-native";
 import { StyleSheet } from "react";
 import { ScrollView } from "react-native-gesture-handler";
+import {useNavigation} from "@react-navigation/native";
 
 export default function CategoryList({ categoryList, children }) {
   const [arrayChild, setArrayChild] = useState([]);
   const [subCategoryList, setSubCategoryList] = useState(false);
+
+  const navigation = useNavigation();
 
   const openCategoryHandler = () => {
     setArrayChild(children);
@@ -24,8 +27,8 @@ export default function CategoryList({ categoryList, children }) {
         {subCategoryList
           ? arrayChild.map((sub, index) => {
               return (
-                <View key={index}>
-                  <Button title={sub.name} />
+                <View key={index} >
+                  <Button onPress={() => navigation.navigate('ProductList',{categoryId : sub.uid})} title={sub.name} />
                 </View>
               );
             })
