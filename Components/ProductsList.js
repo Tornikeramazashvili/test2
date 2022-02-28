@@ -3,11 +3,15 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 
-const ProductsList = () => {
-  const client = new ApolloClient({
-    uri: "https://pspmagento.perse.pro/graphql",
-    cache: new InMemoryCache(),
-  });
+const ProductsList = ({route}) => {
+
+    const { categoryId } = route.params;
+
+
+    const client = new ApolloClient({
+        uri: "https://pspmagento.perse.pro/graphql",
+        cache: new InMemoryCache(),
+      });
 
   const [productList, setProductList] = useState([]);
 
@@ -15,91 +19,58 @@ const ProductsList = () => {
     client
       .query({
         query: gql`
-          query productsList(
-            $search: String = ""
-            $filter: ProductAttributeFilterInput
-            $pageSize: Int = 20
-            $currentPage: Int = 1
-            $sort: ProductAttributeSortInput
-          ) {
+          query Products {
             products(
-              search: $search
-              filter: $filter
-              pageSize: $pageSize
-              currentPage: $currentPage
-              sort: $sort
+              filter: {category_uid: {eq: "${categoryId}"}}
+              pageSize: 10
+              currentPage: 1
             ) {
               aggregations {
-                attribute_code
-                count
-                label
-                options {
-                  label
-                  value
+                  attribute_code
                   count
-                }
-              }
-              items {
-                uid
-                sku
-                name
-                stock_status
-                only_x_left_in_stock
-                rating_summary
-                thumbnail {
-                  url
-                  position
-                  disabled
                   label
-                }
-                url_key
-                url_rewrites {
-                  url
-                }
-                price_range {
-                  maximum_price {
-                    final_price {
-                      currency
-                      value
-                    }
-                    regular_price {
-                      currency
-                      value
-                    }
+                  options {
+                    label
+                    value
+                    count
                   }
-                  minimum_price {
-                    final_price {
-                      currency
-                      value
-                    }
-                    regular_price {
-                      currency
-                      value
+                }
+               items {
+                  name
+                  id
+                  sku
+                  price_range {
+                    minimum_price {
+                      regular_price {
+                        value
+                        currency
+                      }
                     }
                   }
                 }
-              }
               page_info {
-                current_page
-                page_size
-                total_pages
-              }
-              total_count
+                  page_size
+                }
             }
           }
         `,
       })
-      .then((result) => setProductList(result.data?.products.items));
+      .then((result) => setProductList(result.data.products?.items))
+        .catch((error) => console.log(error));
   }, []);
 
-  console.log(productList);
 
   return (
     <>
       <View>
-        {productList.map((product, index) => (
-          <Text key={index}>{product.name}</Text>
-        ))}
+          {productList.map(product => {
+              return (
+                  <View>
+                      <Text key={product.id}>{product.name}</Text>
+                      <Text key={product.id}>{product.id}</Text>
+                  </View>
+              )
+          })}
       </View>
     </>
   );

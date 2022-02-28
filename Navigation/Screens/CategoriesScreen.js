@@ -1,14 +1,107 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, Button } from "react-native";
 import CategoryList from "../../Components/CategoryList";
+import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
+import SubCategoryList from "../../Components/SubCategoryList";
 
 export default function CategoriesScreen({ navigation }) {
+
+  const client = new ApolloClient({
+    uri: "https://pspmagento.perse.pro/graphql",
+    cache: new InMemoryCache(),
+  });
+
+  const [categoryList, setCategoryList] = useState([]);
+
   useEffect(() => {
-    CategoryList;
+    client
+        .query({
+          query: gql`
+          query categoryList {
+            categories {
+              items {
+                children {
+                  include_in_menu
+                  is_anchor
+                  level
+                  uid
+                  name
+                  position
+                  product_count
+                  uid
+                  url_path
+                  url_suffix
+                  meta_title
+                  meta_description
+                  breadcrumbs {
+                    category_name
+                    category_url_path
+                  }
+                  children {
+                    include_in_menu
+                    is_anchor
+                    level
+                    name
+                    position
+                    product_count
+                    uid
+                    url_path
+                    url_suffix
+                    meta_title
+                    meta_description
+                    breadcrumbs {
+                      category_name
+                      category_url_path
+                    }
+                    children {
+                      include_in_menu
+                      is_anchor
+                      level
+                      name
+                      position
+                      product_count
+                      uid
+                      url_path
+                      url_suffix
+                      meta_title
+                      meta_description
+                      breadcrumbs {
+                        category_name
+                        category_url_path
+                      }
+                    }
+                  }
+                }
+                meta_title
+                meta_description
+                product_count
+                name
+                uid
+                breadcrumbs {
+                  category_name
+                  category_url_path
+                }
+              }
+            }
+          }
+        `,
+        })
+        .then((result) =>
+            setCategoryList(result.data?.categories?.items[0].children)
+        );
   }, []);
+
   return (
     <View style={{ marginTop: 20 }}>
-      <CategoryList />
+      <View>
+        {categoryList.map((category, index) => (
+            <SubCategoryList
+                key={index}
+                categoryList={category.name}
+                children={category.children}
+            />
+        ))}
+      </View>
     </View>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -23,7 +22,6 @@ const Tab = createBottomTabNavigator();
 
 export default function MainContainer() {
   return (
-    <NavigationContainer>
       <Tab.Navigator
         initialRouteName={HomeScreen}
         screenOptions={({ route }) => ({
@@ -57,6 +55,5 @@ export default function MainContainer() {
         <Tab.Screen name={cartName} component={CartScreen} />
         <Tab.Screen name={profileName} component={ProfileScreen} />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }

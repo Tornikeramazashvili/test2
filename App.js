@@ -1,11 +1,11 @@
 import "react-native-gesture-handler";
 import React from "react";
-import MainContainer from "./Navigation/MainContainer";
+import StackNavigator from "./Navigation/StackNavigator";
 
 export default function App() {
   return (
     <>
-      <MainContainer />
+      <StackNavigator />
     </>
   );
 }
