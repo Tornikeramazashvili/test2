@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 //Screens
@@ -10,6 +10,7 @@ import CategoriesScreen from "./Screens/CategoriesScreen";
 import SearchScreen from "./Screens/SearchScreen";
 import CartScreen from "./Screens/CartScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
+import { Button, View } from "react-native";
 
 //Screen names
 const homeName = "მთავარი";
@@ -47,6 +48,7 @@ export default function MainContainer() {
           // Styles to Tab navigator
           tabBarActiveTintColor: "#183a7d",
           tabBarLabelStyle: { paddingBottom: 4 },
+          headerShown: false,
         })}
       >
         <Tab.Screen name={homeName} component={HomeScreen} />

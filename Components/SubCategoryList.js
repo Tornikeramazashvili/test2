@@ -3,6 +3,7 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity, Pressable } from "react-native";
 import { Button } from "react-native";
 import { StyleSheet } from "react";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function CategoryList({ categoryList, children }) {
   const [arrayChild, setArrayChild] = useState([]);
@@ -14,19 +15,22 @@ export default function CategoryList({ categoryList, children }) {
   };
 
   return (
-    <View>
-      <View style={{ width: 360 }}>
-        <Button title={categoryList} onPress={() => openCategoryHandler()} />
+    <ScrollView>
+      <View>
+        <Button
+          title={categoryList}
+          onPress={() => openCategoryHandler()}
+        />
+        {subCategoryList
+          ? arrayChild.map((sub, index) => {
+              return (
+                <View key={index}>
+                  <Button title={sub.name} />
+                </View>
+              );
+            })
+          : null}
       </View>
-      {subCategoryList
-        ? arrayChild.map((sub, index) => {
-            return (
-              <View key={index}>
-                <Button title={sub.name} />
-              </View>
-            );
-          })
-        : null}
-    </View>
+    </ScrollView>
   );
 }

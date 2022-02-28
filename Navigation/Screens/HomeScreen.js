@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,9 +7,9 @@ import {
   TextInput,
   ImageBackground,
   TouchableOpacity,
-  Image,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
+import Carousel from "../../Components/Carousel";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -45,8 +45,8 @@ export default function HomeScreen({ navigation }) {
               />
             </View>
             <ImageBackground
-              source={require("../../Images/menu.png")}
-              style={styles.TopSectionCartIcon}
+              source={require("../../Images/shoppingBag.png")}
+              style={styles.TopSectionShoppingBagIcon}
             />
           </View>
         </View>
@@ -58,10 +58,7 @@ export default function HomeScreen({ navigation }) {
         </View>
         <View style={styles.TopSectionCategoriesView}>
           <View style={styles.TopSectionCategoriesSale}>
-            <Image
-              source={require("../../Images/cover.jpg")}
-              style={styles.TopSectionCategoriesSaleImage}
-            />
+            <Carousel />
           </View>
           <TouchableOpacity style={styles.TopSectionCategoriesGreen}>
             <Text style={styles.TopSectionCategoriesGreenText}>აფთიაქი</Text>
@@ -104,7 +101,8 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   TopSectionChooseCityContainer: {
-    backgroundColor: "#E9E7EC",
+    marginTop: 20,
+    // backgroundColor: "#E9E7EC",
     flexDirection: "row",
     alignItems: "center",
     paddingTop: 8,
@@ -142,9 +140,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  TopSectionCartIcon: {
-    width: 40,
-    height: 40,
+  TopSectionShoppingBagIcon: {
+    width: 26,
+    height: 26,
   },
   TopSectionSearch: {
     flexDirection: "row",
@@ -202,11 +200,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-  TopSectionCategoriesSaleImage: {
-    width: 328,
-    height: 100,
-    borderRadius: 8,
-  },
   TopSectionCategoriesSale: {
     marginTop: 16,
     marginBottom: 8,
@@ -216,6 +209,7 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
   },
   MiddleSectionTopProductsView: {
+    width: "100%",
     paddingLeft: 16,
     paddingTop: 10,
     flexDirection: "row",
