@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, Button } from "react-native";
-import CategoryList from "../../Components/CategoryList";
+import { View } from "react-native";
 import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
 import SubCategoryList from "../../Components/SubCategoryList";
 

@@ -15,7 +15,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <ScrollView>
-        <View style={styles.TopSectionChooseCityContainer}>
+        {/* <View style={styles.TopSectionChooseCityContainer}>
           <ImageBackground
             source={require("../../Images/location.png")}
             style={styles.TopSectionLocationIcon}
@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
             source={require("../../Images/dropdown.png")}
             style={styles.TopSectionDropdownIcon}
           />
-        </View>
+        </View> */}
         <View style={styles.TopSectionScrollView}>
           <View style={styles.TopSectionView}>
             <ImageBackground
@@ -45,8 +45,8 @@ export default function HomeScreen({ navigation }) {
               />
             </View>
             <ImageBackground
-              source={require("../../Images/shoppingBag.png")}
-              style={styles.TopSectionShoppingBagIcon}
+              source={require("../../Images/leri.png")}
+              style={styles.TopSectionShoppingCart}
             />
           </View>
         </View>
@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
     paddingTop: 12,
+    marginTop: 20,
   },
   TopSectionView: {
     flexDirection: "row",
@@ -140,9 +141,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  TopSectionShoppingBagIcon: {
-    width: 26,
-    height: 26,
+  TopSectionShoppingCart: {
+    width: 40,
+    height: 40,
   },
   TopSectionSearch: {
     flexDirection: "row",
@@ -232,6 +233,7 @@ const styles = StyleSheet.create({
     height: 33,
   },
   MiddleSectionTopProductsRightSide: {
+    width: "100%",
     marginLeft: 25,
     flexDirection: "row",
     alignItems: "center",

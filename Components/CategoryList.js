@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { useEffect, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { View } from "react-native";
 import SubCategoryList from "./SubCategoryList";
 
 const CategoryList = () => {
   const client = new ApolloClient({
-    uri: "https://pspmagento.perse.pro/graphql",
+    uri: "https://stag.psp.ge/graphql",
     cache: new InMemoryCache(),
   });
 
