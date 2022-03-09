@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { View, ScrollView, Text } from "react-native";
+import {View, ScrollView, Text, Image} from "react-native";
 
 const ProductsList = ({ route }) => {
   const { productId } = route.params;
@@ -10,15 +10,15 @@ const ProductsList = ({ route }) => {
     cache: new InMemoryCache(),
   });
 
-  const [productsDetail, setProductsDetail] = useState([]);
+  const [productsDetail, setProductsDetail] = useState({});
 
   useEffect(() => {
     client
       .query({
         query: gql`
-        query productDetails {
-          productsByID(uid: {eq: "${productId}"}) {
-            uid
+        query productDetails ($id: Int!){
+           productsByID(id: $id ) {
+              uid
               sku
               name
               units
@@ -170,21 +170,31 @@ const ProductsList = ({ route }) => {
           }
         }
       `,
+        variables : {
+          id : productId
+        }
       })
-      .then((result) => console.log(result.data))
+      .then((result) => setProductsDetail(result.data.productsByID))
       .catch((error) => console.log(error));
   }, []);
 
   return (
     <>
       <ScrollView>
-        {productsDetail.map((product) => {
-          return (
-            <View>
-              <Text>{product.stock_status}</Text>
-            </View>
-          );
-        })}
+        <View style={{ marginBottom: 15 }}>
+          <Image
+              style={{
+                width: 300,
+                height: 300,
+                borderRadius: 20,
+              }}
+              resizeMode="contain"
+              source={{ uri: productsDetail?.image?.url }}
+          />
+        </View>
+         <Text>
+           {productsDetail.name}
+         </Text>
       </ScrollView>
     </>
   );

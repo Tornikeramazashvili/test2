@@ -44,6 +44,7 @@ const ProductsList = ({ route }) => {
                 }
                items {
                   name
+                  id
                   uid
                   sku
                   image {
@@ -80,7 +81,7 @@ const ProductsList = ({ route }) => {
                   activeOpacity={0.6}
                   onPress={() =>
                     navigation.navigate("პროდუქტის შესახებ", {
-                      productId: product.uid,
+                      productId: product.id,
                     })
                   }
                 >
