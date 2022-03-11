@@ -45,7 +45,7 @@ export default function HomeScreen({ navigation }) {
               />
             </View>
             <ImageBackground
-              source={require("../../Images/leri.png")}
+              source={require("../../Images/addCart.png")}
               style={styles.TopSectionShoppingCart}
             />
           </View>
@@ -210,7 +210,6 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
   },
   MiddleSectionTopProductsView: {
-    width: "100%",
     paddingLeft: 16,
     paddingTop: 10,
     flexDirection: "row",
@@ -230,6 +229,7 @@ const styles = StyleSheet.create({
   },
   MiddleSectionTopProductsArrow: {
     width: 33,
+
     height: 33,
   },
   MiddleSectionTopProductsRightSide: {

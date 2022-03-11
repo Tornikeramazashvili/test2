@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   ScrollView 
 } from "react-native";
-import { sub } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 
 const ProductsList = ({ route }) => {
@@ -80,7 +79,7 @@ const ProductsList = ({ route }) => {
                 <TouchableOpacity
                   activeOpacity={0.6}
                   onPress={() =>
-                    navigation.navigate("პროდუქტის შესახებ", {
+                    navigation.navigate("About product", {
                       productId: product.id,
                     })
                   }

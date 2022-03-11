@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import {
   ScrollView,
-  TouchableOpacity,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -21,7 +22,7 @@ export default function CategoryList({ categoryList, children }) {
 
   return (
     <>
-      <ScrollView keyboardShouldPersistTaps="always">
+      <ScrollView>
         <TouchableOpacity
           onPress={() => openCategoryHandler()}
           activeOpacity={0.5}
@@ -36,7 +37,7 @@ export default function CategoryList({ categoryList, children }) {
                     activeOpacity={0.8}
                     style={styles.SubButton}
                     onPress={() =>
-                      navigation.navigate("პროდუქტები", {
+                      navigation.navigate("Products", {
                         categoryId: sub.uid,
                       })
                     }

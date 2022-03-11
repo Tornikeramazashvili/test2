@@ -16,12 +16,12 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="პროდუქტები"
+          name="Products"
           component={ProductsList}
           options={{ headerTitleAlign: "center" }}
         />
         <Stack.Screen
-          name="პროდუქტის შესახებ"
+          name="About product"
           component={ProductsDetail}
           options={{ headerTitleAlign: "center" }}
         />
