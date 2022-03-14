@@ -66,12 +66,10 @@ const Carousel = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   wrap: {
-    width: WIDTH * 1.0 ,
+    width: WIDTH * 1.0,
     height: HEIGHT * 0.2,
-
   },
   wrapDot: {
     position: "absolute",

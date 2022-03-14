@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
-import { View } from "react-native";
-import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import { ScrollView, View } from "react-native";
+import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 import SubCategoryList from "../../Components/SubCategoryList";
 
 export default function CategoriesScreen({ navigation }) {
-
   const client = new ApolloClient({
     uri: "https://pspmagento.perse.pro/graphql",
     cache: new InMemoryCache(),
@@ -14,8 +13,8 @@ export default function CategoriesScreen({ navigation }) {
 
   useEffect(() => {
     client
-        .query({
-          query: gql`
+      .query({
+        query: gql`
           query categoryList {
             categories {
               items {
@@ -84,23 +83,23 @@ export default function CategoriesScreen({ navigation }) {
             }
           }
         `,
-        })
-        .then((result) =>
-            setCategoryList(result.data?.categories?.items[0].children)
-        );
+      })
+      .then((result) =>
+        setCategoryList(result.data?.categories?.items[0].children)
+      );
   }, []);
 
   return (
-    <View style={{ marginTop: 20 }}>
-      <View>
+    <View style={{ marginTop: 23 }}>
+      <ScrollView>
         {categoryList.map((category, index) => (
-            <SubCategoryList
-                key={index}
-                categoryList={category.name}
-                children={category.children}
-            />
+          <SubCategoryList
+            key={index}
+            categoryList={category.name}
+            children={category.children}
+          />
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }

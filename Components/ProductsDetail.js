@@ -7,10 +7,10 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground,
 } from "react-native";
 
 const ProductsList = ({ route }) => {
+  
   const { productId } = route.params;
 
   const client = new ApolloClient({
@@ -19,6 +19,9 @@ const ProductsList = ({ route }) => {
   });
 
   const [productsDetail, setProductsDetail] = useState({});
+
+// const regex = /(<([^>]+)>)/ig;
+// const result = data.description.replace(regex, '');
 
   useEffect(() => {
     client
@@ -225,6 +228,11 @@ const ProductsList = ({ route }) => {
           <Text style={styles.text}>
             მწარმოებელი ქვეყანა: {productsDetail.country_of_manufacture}
           </Text>
+          <Text style={styles.text}>
+            პროდუქტის შესახებ: {productsDetail?.description?.html}
+          </Text>
+        </View>
+        <View style={styles.addButtonContainer}>
           <TouchableOpacity activeOpacity={0.8} style={styles.button}>
             <Text style={styles.buttonText}> კალათაში დამატება</Text>
           </TouchableOpacity>
@@ -254,7 +262,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginLeft: 30,
-    marginTop: 10,
+    marginTop: 15,
+    width: "85%",
   },
   button: {
     backgroundColor: "#183a7d",
@@ -269,7 +278,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   priceContainer: {
-    marginTop: 8,
+    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -289,5 +298,9 @@ const styles = StyleSheet.create({
   addbuttonText: {
     fontSize: 18,
     color: "black",
+  },
+  addButtonContainer: {
+    marginLeft: 30,
+    marginBottom: 20,
   },
 });

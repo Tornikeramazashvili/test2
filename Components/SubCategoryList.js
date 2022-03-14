@@ -26,7 +26,8 @@ export default function CategoryList({ categoryList, children }) {
         <TouchableOpacity
           onPress={() => openCategoryHandler()}
           activeOpacity={0.5}
-          style={styles.button}>
+          style={styles.button}
+        >
           <Text style={styles.text}>{categoryList}</Text>
         </TouchableOpacity>
         {subCategoryList
@@ -34,7 +35,7 @@ export default function CategoryList({ categoryList, children }) {
               return (
                 <View key={index}>
                   <TouchableOpacity
-                    activeOpacity={0.8}
+                    activeOpacity={0.5}
                     style={styles.SubButton}
                     onPress={() =>
                       navigation.navigate("Products", {
