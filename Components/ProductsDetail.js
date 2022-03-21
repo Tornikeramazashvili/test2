@@ -7,21 +7,39 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import * as actionTypes from "../redux/types";
 
 const ProductsList = ({ route }) => {
-  
+
+  const dispatch = useDispatch()
+
+  const mycart = useSelector(state => state.mycart)
+
+  console.log(mycart);
+
+  const addToCart = () => {
+    console.log(mycart.cartItems.filter(cart => cart.ProductName == productsDetail.name));
+    dispatch ({
+      type: actionTypes.ADD_TO_CART,
+      payload: {
+          ProductPrice: productsDetail?.price_range?.maximum_price?.final_price?.value.toFixed(2) ,
+          ProductName: productsDetail.name,
+          quantity: mycart.cartItems.filter(cart => cart.ProductName == productsDetail.name).quantity ?? 1,
+      }
+  })
+  }
+
   const { productId } = route.params;
 
   const client = new ApolloClient({
-    uri: "https://stag.psp.ge/graphql",
+    uri: "https://app.psp.ge/graphql",
     cache: new InMemoryCache(),
   });
 
   const [productsDetail, setProductsDetail] = useState({});
-
-// const regex = /(<([^>]+)>)/ig;
-// const result = data.description.replace(regex, '');
 
   useEffect(() => {
     client
@@ -187,6 +205,7 @@ const ProductsList = ({ route }) => {
       })
       .then((result) => setProductsDetail(result.data.productsByID))
       .catch((error) => console.log(error));
+
   }, []);
 
   return (
@@ -213,11 +232,6 @@ const ProductsList = ({ route }) => {
                   ?.currency
               }
             </Text>
-            <TouchableOpacity style={styles.addbutton}>
-              <Text style={styles.addbuttonText}>
-                -{"  "} 0 {"  "}+
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.textContainer}>
@@ -227,15 +241,32 @@ const ProductsList = ({ route }) => {
           <Text style={styles.text}>კოდი: {productsDetail.sku}</Text>
           <Text style={styles.text}>
             მწარმოებელი ქვეყანა: {productsDetail.country_of_manufacture}
+            {"\n"} 
           </Text>
           <Text style={styles.text}>
-            პროდუქტის შესახებ: {productsDetail?.description?.html}
+            პროდუქტის შესახებ:{" "}
+            {productsDetail?.description?.html.replace(/(<([^>]+)>)/gi, "")}
           </Text>
         </View>
         <View style={styles.addButtonContainer}>
-          <TouchableOpacity activeOpacity={0.8} style={styles.button}>
-            <Text style={styles.buttonText}> კალათაში დამატება</Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: "row" }}>
+            <ImageBackground
+              source={require("../Images/Cart.png")}
+              style={styles.TopSectionShoppingCart}
+            />
+            <Text style={styles.cartCount}>
+              0
+              </Text>
+          </View>
+          <View>
+            <TouchableOpacity
+            onPress={() => addToCart()}
+              activeOpacity={0.8}
+              style={styles.button}>
+                  <Text style={styles.buttonText}> კალათაში დამატება</Text>
+                  
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </>
@@ -258,20 +289,20 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "black",
-    fontSize: 14,
+    fontSize: 13,
+    textAlign: "justify",
   },
   textContainer: {
     marginLeft: 30,
     marginTop: 15,
-    width: "85%",
+    width: "83%",
   },
   button: {
     backgroundColor: "#183a7d",
-    borderRadius: 15,
-    width: "90%",
-    marginTop: 20,
+    width: "154%",
     paddingTop: 10,
     paddingBottom: 10,
+    borderRadius: 10,
   },
   buttonText: {
     color: "white",
@@ -300,7 +331,26 @@ const styles = StyleSheet.create({
     color: "black",
   },
   addButtonContainer: {
+    marginTop: 20,
     marginLeft: 30,
     marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "60%",
+  },
+  TopSectionShoppingCart: {
+    width: 40,
+    height: 40,
+  },
+  cartCount: {
+    fontSize: 10,
+    backgroundColor: "#183a7d",
+    color: "white",
+    padding: 2,
+    width: 18,
+    textAlign: "center",
+    borderRadius: 40,
+    position: "absolute",
+    left: 30,
   },
 });

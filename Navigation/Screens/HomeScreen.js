@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -44,10 +44,13 @@ export default function HomeScreen({ navigation }) {
                 style={styles.TopSectionSearchText}
               />
             </View>
-            <ImageBackground
-              source={require("../../Images/addCart.png")}
-              style={styles.TopSectionShoppingCart}
-            />
+            <View style={{ flexDirection: "row" }}>
+              <ImageBackground
+                source={require("../../Images/addCart.png")}
+                style={styles.TopSectionShoppingCart}
+              />
+              <Text style={styles.cartCount}>0</Text>
+            </View>
           </View>
         </View>
         <View>
@@ -242,5 +245,27 @@ const styles = StyleSheet.create({
     fontSize: 11,
     marginRight: 3,
     color: "#253988",
+  },
+  cartCount: {
+    fontSize: 10,
+    backgroundColor: "#65A330",
+    color: "white",
+    padding: 2,
+    width: 18,
+    textAlign: "center",
+    borderRadius: 40,
+    position: "absolute",
+    left: 30,
+  },
+  cartCount: {
+    fontSize: 10,
+    backgroundColor: "#183a7d",
+    color: "white",
+    padding: 2,
+    width: 18,
+    textAlign: "center",
+    borderRadius: 40,
+    position: "absolute",
+    left: 30,
   },
 });

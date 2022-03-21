@@ -5,7 +5,7 @@ import SubCategoryList from "../../Components/SubCategoryList";
 
 export default function CategoriesScreen({ navigation }) {
   const client = new ApolloClient({
-    uri: "https://pspmagento.perse.pro/graphql",
+    uri: "https://app.psp.ge/graphql",
     cache: new InMemoryCache(),
   });
 

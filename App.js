@@ -1,14 +1,17 @@
-import "react-native-gesture-handler";
 import React from "react";
 import StackNavigator from "./Navigation/StackNavigator";
-import CartState from "./Context/Cart/CartState";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store";
 
 export default function App() {
   return (
     <>
-      <CartState>
-        <StackNavigator />
-      </CartState>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <StackNavigator />
+        </PersistGate>
+      </Provider>
     </>
   );
 }

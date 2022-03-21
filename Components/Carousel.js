@@ -9,8 +9,8 @@ import {
 } from "react-native";
 
 const images = [
-  "https://scontent.ftbs5-2.fna.fbcdn.net/v/t39.30808-6/275383896_5177589235608921_4463035434157699715_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=e3f864&_nc_ohc=7sfQTOIpP64AX8ro7cr&_nc_ht=scontent.ftbs5-2.fna&oh=00_AT8D4nkSCuQ-kOw5ZGeTzSAwIROOcO0-QM4aIKyrfIG0jg&oe=6230747D",
-  "https://scontent.ftbs5-3.fna.fbcdn.net/v/t39.30808-6/274921663_5155659771135201_7085333697414186914_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=e3f864&_nc_ohc=pk0A6PdS834AX86W4Qr&_nc_ht=scontent.ftbs5-3.fna&oh=00_AT-MP61srLnopTcUiv5oXEg-v3F18tR0JiKAIYBe-k5uMQ&oe=623003EF",
+  "https://scontent.ftbs5-2.fna.fbcdn.net/v/t39.30808-6/275383896_5177589235608921_4463035434157699715_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=e3f864&_nc_ohc=AEfnMunjKOIAX91W6j1&_nc_ht=scontent.ftbs5-2.fna&oh=00_AT93175beozCvkFhar_-PLXEcYpK-7EN5Z4SYrxkNlXe4g&oe=623C51FD",
+  "https://scontent.ftbs5-3.fna.fbcdn.net/v/t39.30808-6/274921663_5155659771135201_7085333697414186914_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=e3f864&_nc_ohc=WEtCumrg8_MAX_cWGeb&_nc_ht=scontent.ftbs5-3.fna&oh=00_AT-rTmzl_AbVNRxx4GfGPQKEsHFtY1I-_WdI2rWkRjDrnA&oe=623BE16F",
 ];
 
 const WIDTH = Dimensions.get("window").width;

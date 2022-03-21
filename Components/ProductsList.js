@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  ScrollView 
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -14,7 +14,7 @@ const ProductsList = ({ route }) => {
   const { categoryId } = route.params;
 
   const client = new ApolloClient({
-    uri: "https://stag.psp.ge/graphql",
+    uri: "https://app.psp.ge/graphql",
     cache: new InMemoryCache(),
   });
 
