@@ -18,18 +18,23 @@ const ProductsList = ({ route }) => {
 
   const mycart = useSelector(state => state.mycart)
 
-  console.log(mycart);
-
   const addToCart = () => {
-    console.log(mycart.cartItems.filter(cart => cart.ProductName == productsDetail.name));
+    let addedProduct = mycart.cartItems.filter(cart => cart.id === productsDetail.uid)
+    let qty = 1
+    if(addedProduct.length === 1){
+      qty = addedProduct[0].quantity + 1
+    }
+
     dispatch ({
-      type: actionTypes.ADD_TO_CART,
-      payload: {
-          ProductPrice: productsDetail?.price_range?.maximum_price?.final_price?.value.toFixed(2) ,
-          ProductName: productsDetail.name,
-          quantity: mycart.cartItems.filter(cart => cart.ProductName == productsDetail.name).quantity ?? 1,
-      }
-  })
+        type: actionTypes.ADD_TO_CART,
+        payload: {
+            id: productsDetail.uid,
+            ProductPrice: productsDetail?.price_range?.maximum_price?.final_price?.value.toFixed(2) ,
+            ProductName: productsDetail.name,
+            quantity: qty,
+        }
+    })
+
   }
 
   const { productId } = route.params;
@@ -208,6 +213,12 @@ const ProductsList = ({ route }) => {
 
   }, []);
 
+  let cartQty = 0;
+
+  mycart?.cartItems.map(cart => {
+    cartQty += cart.quantity
+  })
+
   return (
     <>
       <ScrollView>
@@ -255,7 +266,7 @@ const ProductsList = ({ route }) => {
               style={styles.TopSectionShoppingCart}
             />
             <Text style={styles.cartCount}>
-              0
+              {mycart?.cartItems.length}
               </Text>
           </View>
           <View>
